@@ -1,0 +1,4 @@
+:Control-R:
+:Escape:
+:Control-T:
+:Control-_:

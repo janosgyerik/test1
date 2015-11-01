@@ -1,9 +1,23 @@
 package com.sevendragons.practice.leetcode.easy.houserobber;
 
 public class Solution {
+    
     public int rob(int[] nums) {
-        
-        return 0;
+        if (nums.length == 0) {
+            return 0;
+        }
+        int a = nums[0] + rob(tail(nums, 2));  // robbing nums[0]
+        int b = rob(tail(nums, 1));            // not robbing nums[0]
+        return Math.max(a, b);
+    }
+    
+    public int[] tail(int[] nums, int skip) {
+        if (nums.length <= skip) {
+            return new int[0];
+        }
+        int[] tail = new int[nums.length - skip];
+        System.arraycopy(nums, skip, tail, 0, tail.length);
+        return tail;
     }
 
     //remove index and adjacent ind
@@ -33,5 +47,6 @@ public class Solution {
         }
         return toReturn;
     }
+    
     
 }

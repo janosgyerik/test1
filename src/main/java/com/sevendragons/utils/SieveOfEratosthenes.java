@@ -31,6 +31,9 @@ public class SieveOfEratosthenes implements Sieve {
 
     @Override
     public boolean isPrime(int num) {
+        if (sieve.length <= num) {
+            throw new IllegalStateException(String.format("Insufficient capacity: %s <= %s (create a bigger sieve)", sieve.length, num));
+        }
         return sieve[num];
     }
 }

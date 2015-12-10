@@ -69,4 +69,10 @@ public class SieveOfEratosthenesTest {
         }
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void test_isPrime_bigger_than_sieve() {
+        int limit = 100;
+        Sieve sieve = new SieveOfEratosthenes(limit);
+        sieve.isPrime(limit + 1);
+    }
 }

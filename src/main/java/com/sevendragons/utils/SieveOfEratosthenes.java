@@ -14,15 +14,15 @@ public class SieveOfEratosthenes implements Sieve {
 
     private final boolean[] sieve;
 
-    public SieveOfEratosthenes(int max) {
-        sieve = new boolean[Math.max(max + 1, 2)];
+    public SieveOfEratosthenes(int limit) {
+        sieve = new boolean[Math.max(limit + 1, 2)];
         Arrays.fill(sieve, true);
         sieve[0] = false;
         sieve[1] = false;
 
-        for (int i = 2; i * i <= max; ++i) {
+        for (int i = 2; i * i <= limit; ++i) {
             if (sieve[i]) {
-                for (int k = i * i; k <= max; k += i) {
+                for (int k = i * i; k <= limit; k += i) {
                     sieve[k] = false;
                 }
             }

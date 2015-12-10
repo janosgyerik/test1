@@ -2,6 +2,14 @@ package com.sevendragons.utils;
 
 import java.util.Arrays;
 
+/**
+ * Implementation of the sieve of Eratosthenes,
+ * useful for repeated checks of primes up to some limit.
+ *
+ * See also:
+ * https://codility.com/programmers/lessons/9/
+ * https://codility.com/media/train/9-Sieve.pdf
+ */
 public class SieveOfEratosthenes implements Sieve {
 
     private final boolean[] sieve;

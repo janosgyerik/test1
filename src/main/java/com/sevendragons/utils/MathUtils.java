@@ -24,6 +24,22 @@ public final class MathUtils {
         return b < a ? gcdHelper(a, b) : gcdHelper(b, a);
     }
 
+    /**
+     * Compute the greatest common divisor of multiple numbers.
+     *
+     * @param a the first number
+     * @param b the second number
+     * @param values more numbers
+     * @return the greatest common divisor of all the numbers
+     */
+    public static int gcd(int a, int b, int... values) {
+        int gcdOfAll = gcd(a, b);
+        for (int x : values) {
+            gcdOfAll = gcd(gcdOfAll, x);
+        }
+        return gcdOfAll;
+    }
+
     private static int gcdHelper(int bigger, int smaller) {
         if (smaller == 0) {
             return bigger;

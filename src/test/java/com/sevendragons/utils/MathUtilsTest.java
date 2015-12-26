@@ -28,6 +28,12 @@ public class MathUtilsTest {
     }
 
     @Test
+    public void test_gcd_45_60_25() {
+        assertEquals(15, gcd(45, 60));
+        assertEquals(5, gcd(45, 60, 25));
+    }
+
+    @Test
     public void test_gcd_bigger_prime_multiples() {
         assertEquals(13 * 17, gcd(2 * 13 * 17, 3 * 13 * 17));
     }

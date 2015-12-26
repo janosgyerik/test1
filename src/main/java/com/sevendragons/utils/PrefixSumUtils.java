@@ -33,7 +33,7 @@ public final class PrefixSumUtils {
      */
     public static int[] prefixSums(int[] arr) {
         int[] sums = new int[arr.length + 1];
-        for (int i = 1; i < arr.length + 1; ++i) {
+        for (int i = 1; i < arr.length + 1; i++) {
             sums[i] = sums[i - 1] + arr[i - 1];
         }
         return sums;

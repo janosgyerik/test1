@@ -15,6 +15,22 @@ public final class PrefixSumUtils {
         throw new AssertionError("utility class, forbidden constructor");
     }
 
+    /**
+     * Create an array of prefix sums for the source array,
+     * such that:
+     *
+     *   prefix[i] = x[0] + x[1] + ... + x[i-1]
+     *
+     * For example, for [3, 1, 5] return [0, 3, 4, 9]:
+     *
+     *   prefix[0] = 0
+     *   prefix[1] = x[0] = 3
+     *   prefix[2] = x[0] + x[1] = 3 + 1 = 4
+     *   prefix[3] = x[0] + x[1] + x[2] = 3 + 1 + 5 = 9
+     *
+     * @param arr source array
+     * @return prefix sums
+     */
     public static int[] prefixSums(int[] arr) {
         int[] sums = new int[arr.length + 1];
         for (int i = 1; i < arr.length + 1; ++i) {

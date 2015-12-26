@@ -13,6 +13,13 @@ public final class MathUtils {
         throw new AssertionError("utility class, forbidden constructor");
     }
 
+    /**
+     * Compute the greatest common divisor of two numbers, using the Euclidean algorithm.
+     *
+     * @param a the first number
+     * @param b the second number
+     * @return the greatest common divisor of the two numbers
+     */
     public static int gcd(int a, int b) {
         return b < a ? gcdHelper(a, b) : gcdHelper(b, a);
     }
@@ -24,6 +31,13 @@ public final class MathUtils {
         return gcd(smaller, bigger % smaller);
     }
 
+    /**
+     * Compute the least common multiple of two numbers, using the Euclidean algorithm.
+     *
+     * @param a the first number
+     * @param b the second number
+     * @return the least common multiple of the two numbers
+     */
     public static int lcm(int a, int b) {
         return a * b / gcd(a, b);
     }

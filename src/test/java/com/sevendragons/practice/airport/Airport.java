@@ -13,6 +13,40 @@ public class Airport {
             this.end = end;
             this.value = value;
         }
+
+        @Override
+        public String toString() {
+            return String.format("%s -> %s : %s", start, end, value);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+
+            Edge edge = (Edge) o;
+
+            if (start != edge.start) {
+                return false;
+            }
+            if (end != edge.end) {
+                return false;
+            }
+            return value == edge.value;
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = start;
+            result = 31 * result + end;
+            result = 31 * result + value;
+            return result;
+        }
     }
 
     public static class TransitEdge extends Edge {
@@ -49,6 +83,30 @@ public class Airport {
         public int distance() {
             return value;
         }
+    }
+
+    public static List<DistanceEdge> toDistanceEdges(int[][] distanceMatrix) {
+        List<DistanceEdge> distanceEdges = new ArrayList<>();
+        for (int row = 0; row < distanceMatrix.length; ++row) {
+            for (int col = 0; col < distanceMatrix[row].length; ++col) {
+                if (row != col) {
+                    distanceEdges.add(new DistanceEdge(row, col, distanceMatrix[row][col]));
+                }
+            }
+        }
+        return distanceEdges;
+    }
+
+    public static List<TransitEdge> toTransitEdges(int[][] transitMatrix) {
+        List<TransitEdge> transitEdges = new ArrayList<>();
+        for (int row = 0; row < transitMatrix.length; ++row) {
+            for (int col = 0; col < transitMatrix[row].length; ++col) {
+                if (row != col) {
+                    transitEdges.add(new TransitEdge(row, col, transitMatrix[row][col]));
+                }
+            }
+        }
+        return transitEdges;
     }
 
     public static void sortByPassengersDescending(List<TransitEdge> transitEdges) {
@@ -116,36 +174,78 @@ public class Airport {
         return new ArrayList<>(sortedAlloc.values());
     }
 
-    private static void allocateToClosest(Map<Integer, Integer> allocations, TransitEdge transit,
+    public static void allocateToClosest(Map<Integer, Integer> allocations, TransitEdge transit,
                                           List<DistanceEdge> distanceEdges) {
 
     }
 
-    private static void allocateToClosest(Map<Integer, Integer> allocations, int start, int[][] distanceMatrix,
+    public static void allocateToClosest(Map<Integer, Integer> allocations, int start, int[][] distanceMatrix,
                                           List<DistanceEdge> distanceEdges) {
     }
 
-    private static List<DistanceEdge> toDistanceEdges(int[][] distanceMatrix) {
-        return null;
+    public static int[][] toSymmetric(int[][] matrix) {
+        int matrixLength = matrix.length;
+        int[][] matrixSymmetric = new int[matrixLength][matrixLength];
+
+        for (int i = 0; i < matrixLength; i++) {
+            for (int j = 0; j < matrixLength; j++) {
+                if (j != i) {
+                    matrixSymmetric[i][j] = matrix[i][j] + matrix[j][i];
+                } else {
+                    matrixSymmetric[i][j] = matrix[i][j];
+                }
+            }
+        }
+
+        return matrixSymmetric;
     }
 
-    private static List<TransitEdge> toTransitEdges(int[][] transitMatrix) {
-        return null;
+    public static int[][] readMatrix(Scanner scanner, int dimensions) {
+        int[][] matrix = new int[dimensions][dimensions];
+        for (int i = 0; i < dimensions; i++) {
+            String[] values = scanner.nextLine().split(",");
+            for (int j = 0; j < values.length; j++) {
+                matrix[i][j] = Integer.valueOf(values[j]);
+            }
+        }
+        return matrix;
     }
 
-    private static int[][] toSymmetric(int[][] ints) {
-        return new int[0][];
+    public static int readDimensions(Scanner scanner) {
+        return Integer.valueOf(scanner.nextLine());
     }
 
-    private static int[][] readMatrix(Scanner scanner, int dimensions) {
-        return new int[0][];
-    }
-
-    private static int readDimensions(Scanner scanner) {
-        return 0;
-    }
-
-    static boolean isAllocated(Map<Integer, Integer> allocations, int start) {
+    public static boolean isAllocated(Map<Integer, Integer> allocations, int start) {
         return false;
+    }
+
+    public static int totalDistanceWalked(
+            Map<Integer, Integer> allocations, int[][] distanceMatrix, int[][] transitMatrix) {
+        int total = 0;
+        for (int row = 0; row < transitMatrix.length; ++row) {
+            for (int col = 0; col < transitMatrix[row].length; ++col) {
+                if (row != col) {
+                    total += distanceWalked(allocations, distanceMatrix, transitMatrix, row, col);
+                }
+            }
+        }
+        return total;
+    }
+
+    private static int distanceWalked(
+            Map<Integer, Integer> allocations, int[][] distanceMatrix, int[][] transitMatrix,
+            int startFlight, int endFlight) {
+
+        Integer startGate = allocations.get(startFlight);
+        if (startGate == null) {
+            return 0;
+        }
+
+        Integer endGate = allocations.get(endFlight);
+        if (endGate == null) {
+            return 0;
+        }
+
+        return distanceMatrix[startGate][endGate] * transitMatrix[startFlight][endFlight];
     }
 }

@@ -4,19 +4,29 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.sevendragons.practice.airport.Airport.*;
 import static org.junit.Assert.assertEquals;
 
 public class AirportTest {
+    private final int[][] exampleTransitMatrix = {
+            {0, 100, 6},
+            {60, 0, 8},
+            {4, 2, 0}
+    };
+
+    private static final int[][] exampleDistanceMatrix = {
+            {0, 10, 12},
+            {10, 0, 5},
+            {12, 5, 0}
+    };
+
     @Test
     public void test_toTransitEdges() {
-        int[][] matrix = {
-                {0, 100, 6},
-                {60, 0, 8},
-                {4, 2, 0}
-        };
+        int[][] matrix = exampleTransitMatrix;
         List<TransitEdge> expected = Arrays.asList(
                 new TransitEdge(0, 1, 100),
                 new TransitEdge(0, 2, 6),
@@ -30,11 +40,7 @@ public class AirportTest {
 
     @Test
     public void test_toDistanceEdges() {
-        int[][] matrix = {
-                {0, 10, 12},
-                {10, 0, 5},
-                {12, 5, 0}
-        };
+        int[][] matrix = exampleDistanceMatrix;
         List<DistanceEdge> expected = Arrays.asList(
                 new DistanceEdge(0, 1, 10),
                 new DistanceEdge(0, 2, 12),
@@ -83,5 +89,15 @@ public class AirportTest {
         int[][] transitMatrix = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
 
         Assert.assertArrayEquals(transitMatrix, toSymmetric(transitMatrix));
+    }
+
+    @Test
+    public void test_totalDistanceWalked_example() {
+        Map<Integer, Integer> allocations = new HashMap<>();
+        allocations.put(2, 0);
+        allocations.put(0, 1);
+        allocations.put(1, 2);
+
+        assertEquals(1020, totalDistanceWalked(allocations, exampleDistanceMatrix, exampleTransitMatrix));
     }
 }

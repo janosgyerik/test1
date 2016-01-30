@@ -220,4 +220,34 @@ public class Airport {
     public static boolean isAllocated(Map<Integer, Integer> allocations, int start) {
         return false;
     }
+
+    public static int totalDistanceWalked(
+            Map<Integer, Integer> allocations, int[][] distanceMatrix, int[][] transitMatrix) {
+        int total = 0;
+        for (int row = 0; row < transitMatrix.length; ++row) {
+            for (int col = 0; col < transitMatrix[row].length; ++col) {
+                if (row != col) {
+                    total += distanceWalked(allocations, distanceMatrix, transitMatrix, row, col);
+                }
+            }
+        }
+        return total;
+    }
+
+    private static int distanceWalked(
+            Map<Integer, Integer> allocations, int[][] distanceMatrix, int[][] transitMatrix,
+            int startFlight, int endFlight) {
+
+        Integer startGate = allocations.get(startFlight);
+        if (startGate == null) {
+            return 0;
+        }
+
+        Integer endGate = allocations.get(endFlight);
+        if (endGate == null) {
+            return 0;
+        }
+
+        return distanceMatrix[startGate][endGate] * transitMatrix[startFlight][endFlight];
+    }
 }

@@ -1,7 +1,6 @@
 package com.sevendragons.practice.airport;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Airport {
     public static class Edge {
@@ -60,4 +59,90 @@ public class Airport {
         Collections.sort(distanceEdges, (o1, o2) -> Integer.compare(o1.distance(), o2.distance()));
     }
 
+    public static void main(String[] args) {
+        // Pierre-Jean
+        Scanner scanner = new Scanner("3\n" +
+                "0,10,12\n" +
+                "10,0,5\n" +
+                "12,5,0\n" +
+                "0,100,6\n" +
+                "60,0,8\n" +
+                "4,2,0");
+        int dimensions = readDimensions(scanner);
+        int[][] distanceMatrix = readMatrix(scanner, dimensions);
+
+        // Pierre
+        int[][] transitMatrix = toSymmetric(readMatrix(scanner, dimensions));
+
+        // Janos
+        List<TransitEdge> transitEdges = toTransitEdges(transitMatrix);
+        sortByPassengersDescending(transitEdges);
+
+        List<DistanceEdge> distanceEdges = toDistanceEdges(distanceMatrix);
+        sortByDistanceAscending(distanceEdges);
+
+        Map<Integer, Integer> allocations = new HashMap<>();
+        for (TransitEdge transit : transitEdges) {
+            if (!isAllocated(allocations, transit.start) && !isAllocated(allocations, transit.end)) {
+                allocateToClosest(allocations, transit, distanceEdges);
+                // take the first distance edge
+                // allocate transit.start -> edge.start
+                // allocate transit.end -> edge.end
+                // remove edge from list, and all edges where start == edge.start or .end
+            } else if (!isAllocated(allocations, transit.start)) { // end was allocated
+                allocateToClosest(allocations, transit.start, distanceMatrix, distanceEdges);
+            } else if (!isAllocated(allocations, transit.end)) { // start was allocated
+                allocateToClosest(allocations, transit.end, distanceMatrix, distanceEdges);
+            } else {
+                // both start and end have been allocated, cannot do anything anymore for this transit
+            }
+        }
+        assert allocations.size() == dimensions;
+
+        // Martin
+        List<Integer> output = toOutputList(allocations);
+        writeOutput(output);
+    }
+
+    private static void writeOutput(List<Integer> output) {
+
+    }
+
+    private static List<Integer> toOutputList(Map<Integer, Integer> allocations) {
+        return null;
+    }
+
+
+    private static void allocateToClosest(Map<Integer, Integer> allocations, TransitEdge transit,
+                                          List<DistanceEdge> distanceEdges) {
+
+    }
+
+    private static void allocateToClosest(Map<Integer, Integer> allocations, int start, int[][] distanceMatrix,
+                                          List<DistanceEdge> distanceEdges) {
+    }
+
+    private static List<DistanceEdge> toDistanceEdges(int[][] distanceMatrix) {
+        return null;
+    }
+
+    private static List<TransitEdge> toTransitEdges(int[][] transitMatrix) {
+        return null;
+    }
+
+    private static int[][] toSymmetric(int[][] ints) {
+        return new int[0][];
+    }
+
+    private static int[][] readMatrix(Scanner scanner, int dimensions) {
+        return new int[0][];
+    }
+
+    private static int readDimensions(Scanner scanner) {
+        return 0;
+    }
+
+    static boolean isAllocated(Map<Integer, Integer> allocations, int start) {
+        return false;
+    }
 }

@@ -28,6 +28,24 @@ public class AirportTest {
     }
 
     @Test
+    public void test_toDistanceEdges() {
+        int[][] matrix = {
+                {0, 10, 12},
+                {10, 0, 5},
+                {12, 5, 0}
+        };
+        List<DistanceEdge> expected = Arrays.asList(
+                new DistanceEdge(0, 1, 10),
+                new DistanceEdge(0, 2, 12),
+                new DistanceEdge(1, 0, 10),
+                new DistanceEdge(1, 2, 5),
+                new DistanceEdge(2, 0, 12),
+                new DistanceEdge(2, 1, 5)
+        );
+        assertEquals(expected, toDistanceEdges(matrix));
+    }
+
+    @Test
     public void test_sorted_transit_by_passengers_descending() {
         TransitEdge transitEdge1 = new TransitEdge(1, 2, 1);
         TransitEdge transitEdge2 = new TransitEdge(3, 4, 2);

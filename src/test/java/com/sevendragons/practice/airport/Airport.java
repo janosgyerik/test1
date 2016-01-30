@@ -86,8 +86,16 @@ public class Airport {
         }
     }
 
-    private static List<DistanceEdge> toDistanceEdges(int[][] distanceMatrix) {
-        return null;
+    public static List<DistanceEdge> toDistanceEdges(int[][] distanceMatrix) {
+        List<DistanceEdge> distanceEdges = new ArrayList<>();
+        for (int row = 0; row < distanceMatrix.length; ++row) {
+            for (int col = 0; col < distanceMatrix[row].length; ++col) {
+                if (row != col) {
+                    distanceEdges.add(new DistanceEdge(row, col, distanceMatrix[row][col]));
+                }
+            }
+        }
+        return distanceEdges;
     }
 
     public static List<TransitEdge> toTransitEdges(int[][] transitMatrix) {

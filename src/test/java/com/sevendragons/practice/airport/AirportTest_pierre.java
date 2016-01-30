@@ -8,20 +8,20 @@ public class AirportTest_pierre {
 
 
     @Test
-    public void testSymetric_example() throws Exception {
+    public void testSymmetric_example() throws Exception {
         int[][] transitMatrix = {{0,100,6},{60,0,8},{4,2,0}};
         int[][] transitMatrixExpected = {{0,160,10},{160,0,10},{10,10,0}};
 
-        Assert.assertArrayEquals(transitMatrixExpected,airport.toSymetric(transitMatrix));
+        Assert.assertArrayEquals(transitMatrixExpected,airport.toSymmetric(transitMatrix));
 
 
     }
 
     @Test
-    public void testSymetric_example_alreadySymetric() throws Exception {
+    public void testSymmetric_example_alreadySymetric() throws Exception {
         int[][] transitMatrix = {{1,0,0},{0,1,0},{0,0,1}};
 
-        Assert.assertArrayEquals(transitMatrix,airport.toSymetric(transitMatrix));
+        Assert.assertArrayEquals(transitMatrix,airport.toSymmetric(transitMatrix));
 
 
     }

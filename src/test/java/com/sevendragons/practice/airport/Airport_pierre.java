@@ -3,24 +3,24 @@ package com.sevendragons.practice.airport;
 public class Airport_pierre {
 
 
-    public int[][] toSymetric(int[][] matrix){
-        int lengthmatrix = matrix.length;
-        int [][] matrix_symetric = new int[lengthmatrix][lengthmatrix];
+    public int[][] toSymmetric(int[][] matrix){
+        int matrixLength = matrix.length;
+        int [][] matrixSymmetric = new int[matrixLength][matrixLength];
 
-        for(int i = 0; i<lengthmatrix;i++){
-            for(int j= 0 ; j< lengthmatrix;j++){
+        for(int i = 0; i<matrixLength;i++){
+            for(int j= 0 ; j< matrixLength;j++){
                 if(j!=i){
-                    matrix_symetric[i][j]= matrix[i][j]+matrix[j][i];
+                    matrixSymmetric[i][j]= matrix[i][j]+matrix[j][i];
 
                 }else{
-                    matrix_symetric[i][j]= matrix[i][j];
+                    matrixSymmetric[i][j]= matrix[i][j];
                 }
 
             }
 
         }
 
-        return matrix_symetric;
+        return matrixSymmetric;
 
     }
 }

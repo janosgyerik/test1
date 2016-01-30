@@ -1,11 +1,17 @@
 package com.sevendragons.practice.airport;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static com.sevendragons.practice.airport.Airport.*;
+import static com.sevendragons.practice.airport.Airport.DistanceEdge;
+import static com.sevendragons.practice.airport.Airport.TransitEdge;
+import static com.sevendragons.practice.airport.Airport.sortByDistanceAscending;
+import static com.sevendragons.practice.airport.Airport.sortByPassengersDescending;
+import static com.sevendragons.practice.airport.Airport.toOutputList;
 import static org.junit.Assert.assertEquals;
 
 public class AirportTest {
@@ -31,6 +37,19 @@ public class AirportTest {
         sortByDistanceAscending(distanceEdges);
 
         assertEquals(Arrays.asList(distanceEdge1, distanceEdge2, distanceEdge5), distanceEdges);
+    }
+
+    @Test
+    public void test_toOutputList() {
+        List<Integer> output = Arrays.asList(3,1,2,4);
+
+        Map<Integer, Integer> allocations = new HashMap<>();
+        allocations.put(1,2);
+        allocations.put(4,4);
+        allocations.put(3,1);
+        allocations.put(2,3);
+
+        assertEquals(toOutputList(allocations), output);
     }
 
 }

@@ -104,14 +104,17 @@ public class Airport {
         writeOutput(output);
     }
 
-    private static void writeOutput(List<Integer> output) {
-
+    public static void writeOutput(List<Integer> output) {
+        output.forEach(System.out::println);
     }
 
-    private static List<Integer> toOutputList(Map<Integer, Integer> allocations) {
-        return null;
+    public static List<Integer> toOutputList(Map<Integer, Integer> allocations){
+        Map<Integer, Integer> sortedAlloc = new TreeMap<>();
+        for (Map.Entry<Integer, Integer> allocation : allocations.entrySet()) {
+            sortedAlloc.put(allocation.getValue(), allocation.getKey());
+        }
+        return new ArrayList<>(sortedAlloc.values());
     }
-
 
     private static void allocateToClosest(Map<Integer, Integer> allocations, TransitEdge transit,
                                           List<DistanceEdge> distanceEdges) {

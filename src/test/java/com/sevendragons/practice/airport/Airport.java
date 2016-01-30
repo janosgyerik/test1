@@ -198,11 +198,23 @@ public class Airport {
     }
 
     public static int[][] readMatrix(Scanner scanner, int dimensions) {
-        return new int[0][];
+        int[][] matrix = new int[dimensions][dimensions];
+        for (int i = 0; i < dimensions; i++){
+            String[] values = scanner.nextLine().split(",");
+            for (int j = 0; j < values.length; j++){
+                try{
+                    matrix[i][j] = Integer.valueOf(values[j]);
+                } catch (NumberFormatException e) {
+                    System.err.println("Error when parsing line "+i+" column "+j+": not parsable value "+values[j]);
+                }
+
+            }
+        }
+        return matrix;
     }
 
     public static int readDimensions(Scanner scanner) {
-        return 0;
+        return Integer.valueOf(scanner.nextLine());
     }
 
     public static boolean isAllocated(Map<Integer, Integer> allocations, int start) {

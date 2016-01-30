@@ -72,21 +72,16 @@ public class AirportTest {
 
     @Test
     public void test_toSymmetric_example() throws Exception {
-        int[][] transitMatrix = {{0,100,6},{60,0,8},{4,2,0}};
-        int[][] transitMatrixExpected = {{0,160,10},{160,0,10},{10,10,0}};
+        int[][] transitMatrix = {{0, 100, 6}, {60, 0, 8}, {4, 2, 0}};
+        int[][] transitMatrixExpected = {{0, 160, 10}, {160, 0, 10}, {10, 10, 0}};
 
-        Assert.assertArrayEquals(transitMatrixExpected,toSymmetric(transitMatrix));
-
-
+        Assert.assertArrayEquals(transitMatrixExpected, toSymmetric(transitMatrix));
     }
 
     @Test
     public void test_toSymmetric_alreadySymmetric() throws Exception {
-        int[][] transitMatrix = {{1,0,0},{0,1,0},{0,0,1}};
+        int[][] transitMatrix = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
 
-        Assert.assertArrayEquals(transitMatrix,toSymmetric(transitMatrix));
-
-
+        Assert.assertArrayEquals(transitMatrix, toSymmetric(transitMatrix));
     }
-
 }

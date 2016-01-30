@@ -1,5 +1,6 @@
 package com.sevendragons.practice.airport;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -67,6 +68,25 @@ public class AirportTest {
         sortByDistanceAscending(distanceEdges);
 
         assertEquals(Arrays.asList(distanceEdge1, distanceEdge2, distanceEdge5), distanceEdges);
+    }
+
+    @Test
+    public void test_toSymmetric_example() throws Exception {
+        int[][] transitMatrix = {{0,100,6},{60,0,8},{4,2,0}};
+        int[][] transitMatrixExpected = {{0,160,10},{160,0,10},{10,10,0}};
+
+        Assert.assertArrayEquals(transitMatrixExpected,toSymmetric(transitMatrix));
+
+
+    }
+
+    @Test
+    public void test_toSymmetric_alreadySymmetric() throws Exception {
+        int[][] transitMatrix = {{1,0,0},{0,1,0},{0,0,1}};
+
+        Assert.assertArrayEquals(transitMatrix,toSymmetric(transitMatrix));
+
+
     }
 
 }

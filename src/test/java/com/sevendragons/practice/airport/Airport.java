@@ -1,5 +1,6 @@
 package com.sevendragons.practice.airport;
 
+import javax.swing.tree.TreeNode;
 import java.util.*;
 
 public class Airport {
@@ -12,6 +13,40 @@ public class Airport {
             this.start = start;
             this.end = end;
             this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s -> %s : %s", start, end, value);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+
+            Edge edge = (Edge) o;
+
+            if (start != edge.start) {
+                return false;
+            }
+            if (end != edge.end) {
+                return false;
+            }
+            return value == edge.value;
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = start;
+            result = 31 * result + end;
+            result = 31 * result + value;
+            return result;
         }
     }
 
@@ -49,6 +84,22 @@ public class Airport {
         public int distance() {
             return value;
         }
+    }
+
+    private static List<DistanceEdge> toDistanceEdges(int[][] distanceMatrix) {
+        return null;
+    }
+
+    public static List<TransitEdge> toTransitEdges(int[][] transitMatrix) {
+        List<TransitEdge> transitEdges = new ArrayList<>();
+        for (int row = 0; row < transitMatrix.length; ++row) {
+            for (int col = 0; col < transitMatrix[row].length; ++col) {
+                if (row != col) {
+                    transitEdges.add(new TransitEdge(row, col, transitMatrix[row][col]));
+                }
+            }
+        }
+        return transitEdges;
     }
 
     public static void sortByPassengersDescending(List<TransitEdge> transitEdges) {
@@ -120,14 +171,6 @@ public class Airport {
 
     private static void allocateToClosest(Map<Integer, Integer> allocations, int start, int[][] distanceMatrix,
                                           List<DistanceEdge> distanceEdges) {
-    }
-
-    private static List<DistanceEdge> toDistanceEdges(int[][] distanceMatrix) {
-        return null;
-    }
-
-    private static List<TransitEdge> toTransitEdges(int[][] transitMatrix) {
-        return null;
     }
 
     private static int[][] toSymmetric(int[][] ints) {

@@ -10,6 +10,24 @@ import static org.junit.Assert.assertEquals;
 
 public class AirportTest {
     @Test
+    public void test_toTransitEdges() {
+        int[][] matrix = {
+                {0, 100, 6},
+                {60, 0, 8},
+                {4, 2, 0}
+        };
+        List<TransitEdge> expected = Arrays.asList(
+                new TransitEdge(0, 1, 100),
+                new TransitEdge(0, 2, 6),
+                new TransitEdge(1, 0, 60),
+                new TransitEdge(1, 2, 8),
+                new TransitEdge(2, 0, 4),
+                new TransitEdge(2, 1, 2)
+        );
+        assertEquals(expected, toTransitEdges(matrix));
+    }
+
+    @Test
     public void test_sorted_transit_by_passengers_descending() {
         TransitEdge transitEdge1 = new TransitEdge(1, 2, 1);
         TransitEdge transitEdge2 = new TransitEdge(3, 4, 2);

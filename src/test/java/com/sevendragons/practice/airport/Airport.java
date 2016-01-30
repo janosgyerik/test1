@@ -1,6 +1,5 @@
 package com.sevendragons.practice.airport;
 
-import javax.swing.tree.TreeNode;
 import java.util.*;
 
 public class Airport {
@@ -163,53 +162,50 @@ public class Airport {
         writeOutput(output);
     }
 
-    private static void writeOutput(List<Integer> output) {
+    public static void writeOutput(List<Integer> output) {
 
     }
 
-    private static List<Integer> toOutputList(Map<Integer, Integer> allocations) {
+    public static List<Integer> toOutputList(Map<Integer, Integer> allocations) {
         return null;
     }
 
 
-    private static void allocateToClosest(Map<Integer, Integer> allocations, TransitEdge transit,
+    public static void allocateToClosest(Map<Integer, Integer> allocations, TransitEdge transit,
                                           List<DistanceEdge> distanceEdges) {
 
     }
 
-    private static void allocateToClosest(Map<Integer, Integer> allocations, int start, int[][] distanceMatrix,
+    public static void allocateToClosest(Map<Integer, Integer> allocations, int start, int[][] distanceMatrix,
                                           List<DistanceEdge> distanceEdges) {
     }
 
     public static int[][] toSymmetric(int[][] matrix) {
         int matrixLength = matrix.length;
-        int [][] matrixSymmetric = new int[matrixLength][matrixLength];
+        int[][] matrixSymmetric = new int[matrixLength][matrixLength];
 
-        for(int i = 0; i<matrixLength;i++){
-            for(int j= 0 ; j< matrixLength;j++){
-                if(j!=i){
-                    matrixSymmetric[i][j]= matrix[i][j]+matrix[j][i];
-
-                }else{
-                    matrixSymmetric[i][j]= matrix[i][j];
+        for (int i = 0; i < matrixLength; i++) {
+            for (int j = 0; j < matrixLength; j++) {
+                if (j != i) {
+                    matrixSymmetric[i][j] = matrix[i][j] + matrix[j][i];
+                } else {
+                    matrixSymmetric[i][j] = matrix[i][j];
                 }
-
             }
-
         }
 
         return matrixSymmetric;
     }
 
-    private static int[][] readMatrix(Scanner scanner, int dimensions) {
+    public static int[][] readMatrix(Scanner scanner, int dimensions) {
         return new int[0][];
     }
 
-    private static int readDimensions(Scanner scanner) {
+    public static int readDimensions(Scanner scanner) {
         return 0;
     }
 
-    static boolean isAllocated(Map<Integer, Integer> allocations, int start) {
+    public static boolean isAllocated(Map<Integer, Integer> allocations, int start) {
         return false;
     }
 }

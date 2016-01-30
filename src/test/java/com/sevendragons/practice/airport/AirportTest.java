@@ -1,9 +1,6 @@
 package com.sevendragons.practice.airport;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,6 +14,7 @@ import static com.sevendragons.practice.airport.Airport.toOutputList;
 import static com.sevendragons.practice.airport.Airport.toSymmetric;
 import static com.sevendragons.practice.airport.Airport.toTransitEdges;
 import static com.sevendragons.practice.airport.Airport.totalDistanceWalked;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class AirportTest {
@@ -89,14 +87,14 @@ public class AirportTest {
         int[][] transitMatrix = {{0, 100, 6}, {60, 0, 8}, {4, 2, 0}};
         int[][] transitMatrixExpected = {{0, 160, 10}, {160, 0, 10}, {10, 10, 0}};
 
-        Assert.assertArrayEquals(transitMatrixExpected, toSymmetric(transitMatrix));
+        assertArrayEquals(transitMatrixExpected, toSymmetric(transitMatrix));
     }
 
     @Test
     public void test_toSymmetric_alreadySymmetric() throws Exception {
         int[][] transitMatrix = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
 
-        Assert.assertArrayEquals(transitMatrix, toSymmetric(transitMatrix));
+        assertArrayEquals(transitMatrix, toSymmetric(transitMatrix));
     }
 
     @Test
@@ -122,4 +120,17 @@ public class AirportTest {
         assertEquals(toOutputList(allocations), output);
     }
 
+    @Test
+    public void readDimensions(){
+        Scanner scanner = new Scanner("3\n" +
+                "0,10,12\n" +
+                "10,0,5\n" +
+                "12,5,0\n" +
+                "0,100,6\n" +
+                "60,0,8\n" +
+                "4,2,0");
+        assertEquals(Airport.readDimensions(scanner), 3);
+        assertArrayEquals(Airport.readMatrix(scanner, 3),new int[][]{{0,10,12},{10,0,5},{12,5,0}});
+        assertArrayEquals(Airport.readMatrix(scanner, 3),new int[][]{{0,100,6},{60,0,8},{4,2,0}});
+    }
 }

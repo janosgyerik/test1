@@ -1,8 +1,8 @@
 README.md
+added.txt
 escape.txt
 hello.groovy
 index.html
 jquery-showLinkLocation.js
-ls.lout
-notes/
-Sat Oct 29 00:28:54 CEST 2016
+ls.out
+notes
